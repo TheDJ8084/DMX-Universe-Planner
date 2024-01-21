@@ -1,6 +1,8 @@
 # DMX-Universe-Planner
 A tool to plan all your DMX universes 
 
+This tool allows you to put in data from your fixtures and put it in a table. You can also export the table to a csv file. at the moment thr max amount if universes is 8 but there will be more in the future 
+
 ## Dependencies
 - [Python](https://www.python.org/)
 - [PySimpleGui](https://pypi.org/project/PySimpleGUI/)
