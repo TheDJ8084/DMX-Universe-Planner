@@ -1,7 +1,7 @@
 # DMX-Universe-Planner
 A tool to plan all your DMX universes 
 
-This tool allows you to put in data(dmx adrres, name, FID, amount of channels) from your fixtures and put it in a table. You can also export the table to a csv file. at the moment thr max amount if universes is 8 but there will be more in the future 
+This tool allows you to put in data(dmx adrress, name, FID, amount of channels) from your fixtures and put it in a table. You can also export the table to a csv file. at the moment thr max amount if universes is 8 but there will be more in the future 
 
 ## Dependencies
 - [Python](https://www.python.org/)
