@@ -18,7 +18,9 @@ file_names = [
 
 def load_data(module_name):
     try:
-        module = importlib.import_module(module_name)
+        subfolder = "Universes"
+        full_module_name = f"{subfolder}.{module_name}"
+        module = importlib.import_module(full_module_name)
         return module.Addresses
     except Exception as e:
         print(f"Error loading data from {module_name}: {e}")
@@ -101,14 +103,17 @@ while True:
 
             tab_index = int(values["TabGroup"].split(" ")[1])
             for i in range(start_index, end_index):
-                DMX_data[tab_index][i][1] = new_fixture_name
-                try:
-                    existing_fid_value = int(DMX_data[tab_index][i][2])
-                    DMX_data[tab_index][i][2] = str(existing_fid_value + fid1_value)
-                except ValueError:
-                    sg.popup_error(
-                        f"The existing FID value at index {i} is not a number."
-                    )
+                if 0 <= i < len(DMX_data[tab_index]):
+                    DMX_data[tab_index][i][1] = new_fixture_name
+                    try:
+                        existing_fid_value = int(DMX_data[tab_index][i][2])
+                        DMX_data[tab_index][i][2] = str(existing_fid_value + fid1_value)
+                    except ValueError:
+                        sg.popup_error(
+                            f"The existing FID value at index {i} is not a number."
+                        )
+                else:
+                    sg.popup_error(f"Index {i} is out of range.")
 
             update_table(DMX_data[tab_index], tab_index)
             for key in values:
@@ -120,10 +125,10 @@ while True:
                 "Please enter valid numeric values for DMX Address, FID, Channels, and Amount."
             )
 
-    if event == "Export":
+    if event == "Export current universe":
         try:
             tab_index = int(values["TabGroup"].split(" ")[1])
-            export_filename = f"Universe{tab_index + 1}_export.csv"
+            export_filename = f"Universes/Universe{tab_index + 1}_export.csv"
             export_to_csv(export_filename, DMX_data[tab_index])
             sg.popup(f"Data exported to {export_filename}")
         except Exception as e:
